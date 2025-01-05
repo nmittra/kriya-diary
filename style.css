@@ -1,0 +1,18 @@
+/* Additional CSS for animations */
+.quote {
+    transition: opacity 0.5s ease-in-out;
+}
+
+.nav-item:hover {
+    color: var(--accent-color);
+}
+
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 20px;
+    }
+    
+    .quote {
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kriya Yoga Handbook</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #FFD699;
+            --text-color: #333;
+            --accent-color: #2DBDB6;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-color);
+        }
+
+        .header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: var(--text-color);
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .carousel {
+            background: white;
+            border-radius: 15px;
+            margin: 20px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .quote {
+            text-align: center;
+            font-size: 18px;
+            margin: 20px 0;
+        }
+
+        .start-button {
+            display: block;
+            background: var(--accent-color);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin: 20px;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-item {
+            text-align: center;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Namaskar</h1>
+        <div class="header-icons">
+            <span>🔕</span>
+            <span>🔔</span>
+            <span>👤</span>
+        </div>
+    </div>
+
+    <div class="carousel">
+        <div class="quote">
+            "Enlightenment happens quietly, like the blossoming of a flower."
+        </div>
+        <a href="#" class="start-button">Start Your Day</a>
+    </div>
+
+    <nav class="navigation">
+        <a href="#" class="nav-item">
+            <div>🏠</div>
+            Home
+        </a>
+        <a href="#" class="nav-item">
+            <div>📚</div>
+            Wisdom
+        </a>
+        <a href="#" class="nav-item">
+            <div>🧘</div>
+            Yoga
+        </a>
+        <a href="#" class="nav-item">
+            <div>⚡</div>
+            Inner Engineering
+        </a>
+    </nav>
+</body>
+</html>
