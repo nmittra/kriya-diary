@@ -16,3 +16,20 @@
         font-size: 16px;
     }
 }
+.next-button {
+    display: block;
+    background: var(--accent-color);
+    color: white;
+    text-align: center;
+    padding: 15px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    margin: 30px auto;
+    max-width: 200px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.next-button:hover {
+    background-color: #25a6a0;
+}
