@@ -1,0 +1,31 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "start": "vitepress dev docs"
+  },
+  "devDependencies": {
+    "vitepress": "latest",
+    "@types/node": "^20.8.2",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@vueuse/core": "^12.4.0",
+    "recharts": "^2.15.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "date-fns": "^2.30.0",
+    "lucide-vue-next": "^0.284.0",
+    "radix-vue": "^0.4.1",
+    "tailwind-merge": "^1.14.0",
+    "tailwindcss-animate": "^1.0.7",
+    "vue": "^3.3.0",
+    "@vitejs/plugin-vue": "^4.0.0"
+  }
+}
