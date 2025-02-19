@@ -8,6 +8,13 @@ import {
   Text,
   VStack,
   useColorModeValue,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
 } from '@chakra-ui/react'
 import { FiImage, FiCrop, FiEdit, FiDownload } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
@@ -49,6 +56,7 @@ function FeatureCard({ icon, title, description, to }: FeatureCardProps) {
 }
 
 export function LandingPage() {
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const features = [
     {
       icon: FiImage,
@@ -66,7 +74,7 @@ export function LandingPage() {
       icon: FiEdit,
       title: 'Photo Editor',
       description: 'Spice up your pictures with text, effects, frames or stickers. Simple editing tools for your image needs.',
-      to: '/editor',
+      to: '/editor/main',
     },
     {
       icon: FiDownload,
@@ -78,19 +86,19 @@ export function LandingPage() {
       icon: FiCrop,
       title: 'Crop IMAGE',
       description: 'Crop your images to the perfect size and aspect ratio. Remove unwanted areas with precision.',
-      to: '/editor?tab=crop',
+      to: '/editor/crop',
     },
     {
       icon: FiEdit,
       title: 'Convert Format',
       description: 'Convert your images between different formats including JPG, PNG, and WebP while maintaining quality.',
-      to: '/editor?tab=convert',
+      to: '/editor/convert',
     },
     {
       icon: FiEdit,
       title: 'Meme Generator',
       description: 'Create funny memes by adding custom text to your images. Perfect for social media sharing.',
-      to: '/editor?tab=meme',
+      to: '/editor/meme',
     }
   ]
 
@@ -99,7 +107,7 @@ export function LandingPage() {
       <Header />
       <Box
         bgGradient="linear(to-r, green.200, blue.400, purple.500, pink.400)"
-        py={32}
+        py={20}
         px={4}
         textAlign="center"
         position="relative"
@@ -130,13 +138,12 @@ export function LandingPage() {
               Your online photo editor is here and forever free!
             </Text>
             <Button
-              as={Link}
-              to="/editor"
               size="lg"
               colorScheme="whiteAlpha"
               fontWeight="bold"
               px={8}
               py={6}
+              onClick={onOpen}
               _hover={{
                 transform: 'translateY(-2px)',
                 boxShadow: 'xl'
@@ -164,6 +171,28 @@ export function LandingPage() {
           ))}
         </Grid>
       </Container>
+
+      <Modal isOpen={isOpen} onClose={onClose} size="4xl">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Choose Your Editing Tool</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <Grid
+              templateColumns={{
+                base: '1fr',
+                md: 'repeat(2, 1fr)',
+                lg: 'repeat(3, 1fr)',
+              }}
+              gap={4}
+            >
+              {features.map((feature) => (
+                <FeatureCard key={feature.title} {...feature} />
+              ))}
+            </Grid>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </Box>
   )
 }

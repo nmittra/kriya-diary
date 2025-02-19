@@ -20,27 +20,44 @@ import { WatermarkPanel } from './editor/WatermarkPanel'
 import { ConvertPanel } from './editor/ConvertPanel'
 import { CropPanel } from './editor/CropPanel'
 import { MemePanel } from './editor/MemePanel'
+import { useParams } from 'react-router-dom'
 
-interface ImageEditorProps {
-  selectedImage: {
-    file: File
-    preview: string
-  }
-  setSelectedImage: (image: { file: File; preview: string } | null) => void
-}
-
-export function ImageEditor({ selectedImage, setSelectedImage }: ImageEditorProps) {
-  const [editedImage, setEditedImage] = useState<string>(selectedImage.preview)
+export function ImageEditor({ selectedImage: propSelectedImage, setSelectedImage: propSetSelectedImage, defaultTab }: {
+  selectedImage?: { file: File; preview: string } | null
+  setSelectedImage?: (image: { file: File; preview: string } | null) => void
+  defaultTab?: string
+}) {
+  const { '*': pathParam } = useParams()
+  const initialTab = pathParam || defaultTab || 'resize'
+  const [editedImage, setEditedImage] = useState<string>('')
+  const [selectedImage, setSelectedImage] = useState<{ file: File; preview: string } | null>(propSelectedImage || null)
   const bg = useColorModeValue('white', 'gray.700')
   const borderColor = useColorModeValue('gray.200', 'gray.600')
 
   const handleDownload = () => {
+    if (!selectedImage || !editedImage) return
     const link = document.createElement('a')
     link.href = editedImage
     link.download = `edited-${selectedImage.file.name}`
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
+  }
+
+  if (!selectedImage) {
+    return null
+  }
+
+  const getInitialTabIndex = () => {
+    const tabMap: { [key: string]: number } = {
+      resize: 0,
+      compress: 1,
+      watermark: 2,
+      convert: 3,
+      crop: 4,
+      meme: 5
+    }
+    return tabMap[initialTab] || 0
   }
 
   return (
@@ -65,7 +82,7 @@ export function ImageEditor({ selectedImage, setSelectedImage }: ImageEditorProp
             overflow="auto"
           >
             <Image
-              src={editedImage}
+              src={editedImage || selectedImage.preview}
               alt="Preview"
               maxW="100%"
               h="100%"
@@ -100,7 +117,7 @@ export function ImageEditor({ selectedImage, setSelectedImage }: ImageEditorProp
         borderWidth={1}
         borderColor={borderColor}
       >
-        <Tabs isFitted variant="enclosed">
+        <Tabs isFitted variant="enclosed" defaultIndex={getInitialTabIndex()}>
           <TabList mb={4}>
             <Tab>Resize</Tab>
             <Tab>Compress</Tab>
