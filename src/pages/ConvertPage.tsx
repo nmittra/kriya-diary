@@ -9,7 +9,8 @@ interface ImageFile {
   preview: string
 }
 
-export function ConvertPage() {
+// Change from export function ConvertPage() to:
+const ConvertPage = () => {
   const [selectedImage, setSelectedImage] = useState<ImageFile | null>(null)
 
   const bg = useColorModeValue('gray.50', 'gray.800')
@@ -38,3 +39,5 @@ export function ConvertPage() {
     </Box>
   )
 }
+
+export default ConvertPage

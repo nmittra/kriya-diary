@@ -9,7 +9,8 @@ interface ImageFile {
   preview: string
 }
 
-export function CropPage() {
+// Change from export function CropPage() to:
+const CropPage = () => {
   const [selectedImage, setSelectedImage] = useState<ImageFile | null>(null)
 
   const bg = useColorModeValue('gray.50', 'gray.800')
@@ -38,3 +39,5 @@ export function CropPage() {
     </Box>
   )
 }
+
+export default CropPage

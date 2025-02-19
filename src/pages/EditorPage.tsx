@@ -9,7 +9,8 @@ interface ImageFile {
   preview: string
 }
 
-export function EditorPage() {
+// Change from export function EditorPage() to:
+const EditorPage = () => {
   const [selectedImage, setSelectedImage] = useState<ImageFile | null>(null)
 
   const bg = useColorModeValue('gray.50', 'gray.800')
@@ -38,3 +39,5 @@ export function EditorPage() {
     </Box>
   )
 }
+
+export default EditorPage

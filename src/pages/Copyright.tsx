@@ -1,7 +1,8 @@
 import { Box, Container, Heading, Text, VStack, useColorModeValue } from '@chakra-ui/react'
 import { Header } from '../components/Header'
 
-export function Copyright() {
+// Change from export function Copyright() to:
+const Copyright = () => {
   const bg = useColorModeValue('gray.50', 'gray.800')
   const textColor = useColorModeValue('gray.600', 'gray.300')
 
@@ -85,3 +86,5 @@ export function Copyright() {
     </Box>
   )
 }
+
+export default Copyright

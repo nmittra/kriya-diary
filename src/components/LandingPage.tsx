@@ -55,7 +55,8 @@ function FeatureCard({ icon, title, description, to }: FeatureCardProps) {
   )
 }
 
-export function LandingPage() {
+// Change from export function LandingPage() to:
+const LandingPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const features = [
     {
@@ -196,3 +197,4 @@ export function LandingPage() {
     </Box>
   )
 }
+export default LandingPage

@@ -1,7 +1,6 @@
 import { Box, Container, Heading, SimpleGrid, VStack, Text, Link, useColorModeValue } from '@chakra-ui/react'
 import { Link as RouterLink } from 'react-router-dom'
 import { Header } from '../components/Header'
-import { FiImage, FiCrop, FiEdit, FiDownload } from 'react-icons/fi'
 
 interface SitemapSection {
   title: string
@@ -12,7 +11,8 @@ interface SitemapSection {
   }>
 }
 
-export function Sitemap() {
+// Change from export function Sitemap() to:
+function Sitemap() {
   const bg = useColorModeValue('gray.50', 'gray.800')
   const cardBg = useColorModeValue('white', 'gray.700')
   const borderColor = useColorModeValue('gray.200', 'gray.600')
@@ -127,3 +127,5 @@ export function Sitemap() {
     </Box>
   )
 }
+
+export default Sitemap

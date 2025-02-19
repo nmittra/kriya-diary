@@ -9,7 +9,8 @@ interface ImageFile {
   preview: string
 }
 
-export function ResizePage() {
+// Change from export function ResizePage() to:
+const ResizePage = () => {
   const [selectedImage, setSelectedImage] = useState<ImageFile | null>(null)
 
   const bg = useColorModeValue('gray.50', 'gray.800')
@@ -38,3 +39,5 @@ export function ResizePage() {
     </Box>
   )
 }
+
+export default ResizePage

@@ -1,7 +1,8 @@
 import { Box, Container, Heading, Text, VStack, useColorModeValue } from '@chakra-ui/react'
 import { Header } from '../components/Header'
 
-export function CookiePolicy() {
+// Change from export function CookiePolicy() to:
+const CookiePolicy = () => {
   const bg = useColorModeValue('gray.50', 'gray.800')
   const textColor = useColorModeValue('gray.600', 'gray.300')
 
@@ -100,3 +101,4 @@ export function CookiePolicy() {
     </Box>
   )
 }
+export default CookiePolicy

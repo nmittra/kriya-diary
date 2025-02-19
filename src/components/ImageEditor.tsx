@@ -9,7 +9,7 @@ import {
   TabPanel,
   TabPanels,
   Tabs,
-  VStack,
+  VStack,  // Add VStack to imports
   useColorModeValue,
 } from '@chakra-ui/react'
 import { useState } from 'react'
@@ -22,7 +22,7 @@ import { CropPanel } from './editor/CropPanel'
 import { MemePanel } from './editor/MemePanel'
 import { useParams } from 'react-router-dom'
 
-export function ImageEditor({ selectedImage: propSelectedImage, setSelectedImage: propSetSelectedImage, defaultTab }: {
+export function ImageEditor({ selectedImage: propSelectedImage, defaultTab }: {
   selectedImage?: { file: File; preview: string } | null
   setSelectedImage?: (image: { file: File; preview: string } | null) => void
   defaultTab?: string

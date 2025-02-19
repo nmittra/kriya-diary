@@ -1,7 +1,8 @@
 import { Box, Container, Heading, Text, VStack, useColorModeValue } from '@chakra-ui/react'
 import { Header } from '../components/Header'
 
-export function PrivacyPolicy() {
+// Change from export function PrivacyPolicy() to:
+const PrivacyPolicy = () => {
   const bg = useColorModeValue('gray.50', 'gray.800')
   const textColor = useColorModeValue('gray.600', 'gray.300')
 
@@ -99,3 +100,5 @@ export function PrivacyPolicy() {
     </Box>
   )
 }
+
+export default PrivacyPolicy

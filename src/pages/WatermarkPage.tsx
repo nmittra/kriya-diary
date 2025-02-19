@@ -9,7 +9,8 @@ interface ImageFile {
   preview: string
 }
 
-export function WatermarkPage() {
+// Change from export function WatermarkPage() to:
+const WatermarkPage = () => {
   const [selectedImage, setSelectedImage] = useState<ImageFile | null>(null)
 
   const bg = useColorModeValue('gray.50', 'gray.800')
@@ -38,3 +39,5 @@ export function WatermarkPage() {
     </Box>
   )
 }
+
+export default WatermarkPage

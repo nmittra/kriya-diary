@@ -9,7 +9,8 @@ interface ImageFile {
   preview: string
 }
 
-export function CompressPage() {
+// Change from export function CompressPage() to:
+const CompressPage = () => {
   const [selectedImage, setSelectedImage] = useState<ImageFile | null>(null)
 
   const bg = useColorModeValue('gray.50', 'gray.800')
@@ -38,3 +39,5 @@ export function CompressPage() {
     </Box>
   )
 }
+
+export default CompressPage

@@ -4,16 +4,14 @@ import {
   FormControl,
   FormLabel,
   Input,
-  HStack,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
-  ColorPicker,
   useToast
 } from '@chakra-ui/react'
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 
 interface MemePanelProps {
   image: {
