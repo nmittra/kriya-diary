@@ -9,8 +9,7 @@ interface ImageFile {
   preview: string
 }
 
-// Change from export function CompressPage() to:
-const CompressPage = () => {
+export function CompressPage() {
   const [selectedImage, setSelectedImage] = useState<ImageFile | null>(null)
 
   const bg = useColorModeValue('gray.50', 'gray.800')
@@ -18,12 +17,9 @@ const CompressPage = () => {
   return (
     <Box bg={bg} minH="100vh">
       <Header />
-      <Box py={12}>
-      <Container maxW="container.lg">
-        <VStack spacing={8} align="center" w="full">
-          <Heading as="h1" size="xl" textAlign="center" mb={4}>
-            Compress Your Images
-          </Heading>
+      <Box py={8}>
+      <Container maxW="container.xl">
+        <VStack spacing={8}>
           {!selectedImage ? (
             <ImageUploader setSelectedImage={setSelectedImage} />
           ) : (
@@ -39,5 +35,3 @@ const CompressPage = () => {
     </Box>
   )
 }
-
-export default CompressPage

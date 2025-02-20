@@ -50,29 +50,32 @@ export function CompressPanel({ image, setEditedImage }: CompressPanelProps) {
   }
 
   return (
-    <VStack spacing={6} align="stretch">
+    <VStack spacing={6} align="stretch" p={4}>
       <FormControl>
-        <FormLabel>Quality ({quality}%)</FormLabel>
-        <Slider
-          value={quality}
-          onChange={setQuality}
-          min={1}
-          max={100}
-          step={1}
-        >
-          <SliderTrack>
-            <SliderFilledTrack />
-          </SliderTrack>
-          <SliderThumb />
-        </Slider>
+        <FormLabel fontWeight="medium">Compression Quality</FormLabel>
+        <Box px={2}>
+          <Text mb={2}>{quality}%</Text>
+          <Slider
+            value={quality}
+            onChange={setQuality}
+            min={1}
+            max={100}
+            step={1}
+            colorScheme="blue"
+          >
+            <SliderTrack>
+              <SliderFilledTrack />
+            </SliderTrack>
+            <SliderThumb boxSize={6} />
+          </Slider>
+        </Box>
       </FormControl>
-
-      <Text fontSize="sm" color="gray.500">
-        Original size: {(image.file.size / 1024 / 1024).toFixed(2)} MB
-      </Text>
 
       <Button
         colorScheme="blue"
+        size="lg"
+        width="100%"
+        borderRadius="md"
         onClick={handleCompress}
         isLoading={compressing}
         loadingText="Compressing"

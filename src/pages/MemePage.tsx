@@ -9,8 +9,7 @@ interface ImageFile {
   preview: string
 }
 
-// Change from export function MemePage() to:
-const MemePage = () => {
+export function MemePage() {
   const [selectedImage, setSelectedImage] = useState<ImageFile | null>(null)
 
   const bg = useColorModeValue('gray.50', 'gray.800')
@@ -39,5 +38,3 @@ const MemePage = () => {
     </Box>
   )
 }
-
-export default MemePage

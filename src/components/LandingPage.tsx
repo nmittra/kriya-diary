@@ -55,8 +55,7 @@ function FeatureCard({ icon, title, description, to }: FeatureCardProps) {
   )
 }
 
-// Change from export function LandingPage() to:
-const LandingPage = () => {
+export function LandingPage() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const features = [
     {
@@ -108,7 +107,7 @@ const LandingPage = () => {
       <Header />
       <Box
         bgGradient="linear(to-r, green.200, blue.400, purple.500, pink.400)"
-        py={20}
+        py={32}
         px={4}
         textAlign="center"
         position="relative"
@@ -197,4 +196,3 @@ const LandingPage = () => {
     </Box>
   )
 }
-export default LandingPage

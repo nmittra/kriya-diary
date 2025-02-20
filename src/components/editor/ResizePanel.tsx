@@ -109,5 +109,3 @@ export function ResizePanel({ image, setEditedImage }: ResizePanelProps) {
     </VStack>
   )
 }
-// Remove unused imports and variables
-// If you need to keep them for future use, add // @ts-ignore above them
