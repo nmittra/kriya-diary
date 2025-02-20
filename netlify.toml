@@ -1,6 +1,6 @@
 [build]
-  publish = "project/docs/.vitepress/dist"
-  command = "cd project && npm run docs:build"
+  publish = "docs/.vitepress/dist"
+  command = "npm run docs:build"
 
 [build.environment]
   NODE_VERSION = "18"
