@@ -1,7 +1,8 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useData } from 'vitepress'
+import { useRouter, useData } from 'vitepress'
 
+const router = useRouter()
 const { site } = useData()
 const giftAid = ref(false)
 const donationDetails = ref(null)
@@ -17,7 +18,7 @@ onMounted(() => {
     donationDetails.value = JSON.parse(details)
     console.log('Parsed donation details:', donationDetails.value)
   } else {
-    window.location.href = getPath('donate')
+    router.push('/donate')
   }
 })
 
@@ -31,18 +32,18 @@ const handleSubmit = () => {
   // Route based on payment method
   if (donationDetails.value?.method === 'direct-debit') {
     console.log('Routing to direct-debit page')
-    window.location.href = getPath('donate/direct-debit')
+    router.push('/donate/direct-debit')
   } else if (donationDetails.value?.method === 'paypal') {
     console.log('Routing to payment page')
-    window.location.href = getPath('donate/payment')
+    router.push('/donate/payment')
   } else {
     console.log('No payment method found, going to fallback')
-    window.location.href = getPath('donate')
+    router.push('/donate')
   }
 }
 
 const handleBack = () => {
-  window.location.href = getPath('donate/details')
+  router.push('/donate/details')
 }
 </script>
 
@@ -79,7 +80,14 @@ const handleBack = () => {
         </ul>
       </div>
 
-      <button type="submit">Continue to Payment</button>
+      <div class="form-actions">
+        <button type="button" class="back-btn" @click="handleBack">
+          Back
+        </button>
+        <button type="submit" class="continue-btn">
+          Continue to Payment
+        </button>
+      </div>
     </form>
   </div>
 </template>
@@ -136,5 +144,41 @@ button {
   border-radius: 6px;
   cursor: pointer;
   width: 100%;
+}
+
+/* Add new styles for form actions */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.back-btn,
+.continue-btn {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.back-btn {
+  background: transparent;
+  border: 2px solid var(--vp-c-brand);
+  color: var(--vp-c-brand);
+}
+
+.continue-btn {
+  background: var(--vp-c-brand);
+  border: none;
+  color: white;
+}
+
+.back-btn:hover {
+  background: var(--vp-c-brand-soft);
+}
+
+.continue-btn:hover {
+  background: var(--vp-c-brand-dark);
 }
 </style>

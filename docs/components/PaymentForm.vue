@@ -13,11 +13,11 @@ onMounted(() => {
     donationDetails.value = JSON.parse(details)
     // If payment method is direct debit, redirect to direct debit setup
     if (donationDetails.value.method === 'direct-debit') {
-      router.go('/donate/direct-debit-setup')
+      router.push('/donate/direct-debit')
     }
   } else {
     // If no donation details, redirect back to donation form
-    router.go('/donate')
+    router.push('/donate')
   }
 })
 
@@ -26,103 +26,62 @@ const handlePayment = async () => {
   try {
     // Only handle PayPal payments here
     if (donationDetails.value.method === 'paypal') {
-      if (donationDetails.value.type === 'monthly') {
-        window.location.href = 'https://www.paypal.com/subscribe/?hosted_button_id=SUBSCRIPTION_BUTTON_ID'
-      } else {
-        window.location.href = 'https://www.paypal.com/donate/?hosted_button_id=ONE_TIME_BUTTON_ID'
-      }
+      const paypalUrl = donationDetails.value.type === 'monthly'
+        ? 'https://www.paypal.com/subscribe/?hosted_button_id=SUBSCRIPTION_BUTTON_ID'
+        : 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ONETIME_BUTTON_ID'
+      
+      // For external PayPal URLs, we use window.location.href
+      window.location.href = paypalUrl
     }
   } catch (error) {
-    console.error('Payment processing failed:', error)
+    console.error('Payment processing error:', error)
   } finally {
     processing.value = false
   }
+}
+
+const handleBack = () => {
+  router.push('/donate/gift-aid')
 }
 </script>
 
 <template>
   <div class="payment-form">
-    <!-- Donation Summary -->
-    <div class="donation-summary">
-      <h2 class="text-xl font-bold mb-4">Donation Summary</h2>
-      <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
-        <p class="text-lg">
-          <span class="font-semibold">Amount:</span> 
-          £{{ donationDetails?.amount || '0' }}
-          <span v-if="donationDetails?.type === 'monthly'">/month</span>
-        </p>
-        <p class="text-sm text-gray-600 dark:text-gray-400">
-          {{ donationDetails?.type === 'monthly' ? 'Monthly donation' : 'One-time donation' }}
-        </p>
-      </div>
+    <div class="progress-bar">
+      <div class="progress-step completed">Amount</div>
+      <div class="progress-step completed">Details</div>
+      <div class="progress-step completed">Gift Aid</div>
+      <div class="progress-step active">Payment</div>
     </div>
 
-    <!-- PayPal Payment -->
-    <div class="space-y-6 mt-8">
-      <div class="paypal-info">
-        <div class="flex items-center">
-          <img 
-            src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png" 
-            alt="PayPal" 
-            class="h-6 mr-3"
-          >
-          <p class="text-sm">
-            Secure payment processing by PayPal. You can pay using PayPal or any major credit/debit card.
-            {{ donationDetails?.type === 'monthly' ? 'Your donation will be automatically processed monthly.' : '' }}
-          </p>
-        </div>
+    <div class="payment-container">
+      <h2>Complete Your Payment</h2>
+      <p>You will be redirected to PayPal to complete your {{ donationDetails?.type }} donation.</p>
+      
+      <div class="amount-summary">
+        <h3>Donation Summary</h3>
+        <p>Amount: £{{ donationDetails?.amount }}</p>
+        <p>Type: {{ donationDetails?.type === 'monthly' ? 'Monthly Donation' : 'One-time Donation' }}</p>
       </div>
 
-      <button
-        type="button"
-        @click="handlePayment"
-        :disabled="processing || !donationDetails"
-        class="paypal-button"
-      >
-        <span v-if="processing">Processing...</span>
-        <span v-else>
-          {{ donationDetails?.type === 'monthly' ? 'Set Up Monthly Donation' : 'Complete Donation' }}
-        </span>
-      </button>
-    </div>
-
-    <!-- Payment Methods Icons -->
-    <div class="payment-methods">
-      <img src="/icons/payment/visa.svg" alt="Visa" class="h-8">
-      <img src="/icons/payment/mastercard.svg" alt="Mastercard" class="h-8">
-      <img src="/icons/payment/amex.svg" alt="American Express" class="h-8">
-      <img 
-        src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png" 
-        alt="PayPal" 
-        class="h-8"
-      >
-    </div>
-
-    <!-- Monthly Donation Info -->
-    <div v-if="donationDetails?.type === 'monthly'" class="monthly-info">
-      <h3 class="font-semibold mb-2">About Monthly Donations</h3>
-      <ul class="text-sm text-gray-600 dark:text-gray-400 list-disc pl-5">
-        <li>Your first donation will be processed today</li>
-        <li>Subsequent donations will be automatically processed monthly</li>
-        <li>You can cancel or modify your monthly donation at any time</li>
-        <li>You'll receive email receipts for each donation</li>
-      </ul>
-    </div>
-
-    <!-- Security Notice -->
-    <div class="security-notice">
-      <p>All payments are securely processed.</p>
-      <p>Your payment details are protected.</p>
-    </div>
-
-    <!-- Back Link -->
-    <div class="back-link">
-      <a 
-        href="/donate"
-        class="text-red-600 hover:text-red-700"
-      >
-        ← Return to Donation Form
-      </a>
+      <div class="form-actions">
+        <button 
+          type="button" 
+          class="back-btn" 
+          @click="handleBack"
+          :disabled="processing"
+        >
+          Back
+        </button>
+        <button 
+          type="button" 
+          class="continue-btn" 
+          @click="handlePayment"
+          :disabled="processing"
+        >
+          {{ processing ? 'Processing...' : 'Proceed to PayPal' }}
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -134,79 +93,99 @@ const handlePayment = async () => {
   padding: 20px;
 }
 
-.donation-summary {
-  margin-bottom: 2rem;
+.payment-container {
+  background: var(--vp-c-bg-soft);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.paypal-info {
-  background-color: var(--vp-c-bg-soft);
-  padding: 1rem;
+.amount-summary {
+  background: var(--vp-c-bg);
+  padding: 1.5rem;
   border-radius: 8px;
-  margin-bottom: 1.5rem;
-  color: var(--vp-c-text-1);
-}
-
-.paypal-button {
-  width: 100%;
-  background-color: var(--vp-c-brand);
-  color: white;
-  padding: 1rem;
-  border-radius: 8px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.paypal-button:hover {
-  background-color: var(--vp-c-brand-dark);
-}
-
-.paypal-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.payment-methods {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
   margin: 2rem 0;
 }
 
-.monthly-info {
-  background-color: var(--vp-c-bg-soft);
-  padding: 1rem;
-  border-radius: 8px;
-  margin: 1.5rem 0;
+.amount-summary h3 {
+  margin-bottom: 1rem;
   color: var(--vp-c-text-1);
 }
 
-.monthly-info h3 {
-  color: var(--vp-c-text-1);
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.monthly-info ul {
-  list-style-type: disc;
-  padding-left: 1.5rem;
-  color: var(--vp-c-text-1);
-}
-
-.monthly-info li {
-  margin-bottom: 0.5rem;
-}
-
-.security-notice {
-  text-align: center;
-  color: #666;
-  margin: 1.5rem 0;
-}
-
-.back-link {
-  text-align: center;
+.form-actions {
+  display: flex;
+  gap: 1rem;
   margin-top: 2rem;
+}
+
+.back-btn,
+.continue-btn {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.back-btn {
+  background: transparent;
+  border: 2px solid var(--vp-c-brand);
+  color: var(--vp-c-brand);
+}
+
+.continue-btn {
+  background: var(--vp-c-brand);
+  border: none;
+  color: white;
+}
+
+.back-btn:hover:not(:disabled) {
+  background: var(--vp-c-brand-soft);
+}
+
+.continue-btn:hover:not(:disabled) {
+  background: var(--vp-c-brand-dark);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.progress-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+.progress-step {
+  position: relative;
+  padding-bottom: 0.5rem;
+  color: var(--vp-c-text-2);
+  font-size: 0.9rem;
+}
+
+.progress-step::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--vp-c-divider);
+}
+
+.progress-step.completed::after {
+  background: var(--vp-c-brand);
+}
+
+.progress-step.active {
+  color: var(--vp-c-brand);
+  font-weight: 500;
+}
+
+.progress-step.active::after {
+  background: var(--vp-c-brand);
 }
 </style>

@@ -19,8 +19,13 @@ const formData = ref({
 const handleSubmit = async () => {
   // Store donor details
   localStorage.setItem('donorDetails', JSON.stringify(formData.value))
-  // Navigate to gift aid page
-  router.go('/donate/gift-aid')
+  // Changed from router.go to router.push
+  router.push('/donate/gift-aid')
+}
+
+const handleBack = () => {
+  // Add back button handler
+  router.push('/donate')
 }
 </script>
 
@@ -151,7 +156,7 @@ const handleSubmit = async () => {
       </div>
 
       <div class="form-actions">
-        <button type="button" class="back-btn" @click="router.go('/donate')">
+        <button type="button" class="back-btn" @click="handleBack">
           Back
         </button>
         <button type="submit" class="continue-btn">

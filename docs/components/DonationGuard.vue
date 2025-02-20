@@ -8,11 +8,11 @@ const isAuthorized = ref(false)
 onMounted(() => {
   const donationDetails = localStorage.getItem('donationDetails')
   const donorDetails = localStorage.getItem('donorDetails')
-  const paymentMethod = localStorage.getItem('paymentMethod')
+  const giftAid = localStorage.getItem('giftAid')
   
   // Check if user has completed previous steps
-  if (!donationDetails || !donorDetails || paymentMethod !== 'direct-debit') {
-    router.go('/donate')
+  if (!donationDetails || !donorDetails || !giftAid) {
+    router.push('/donate')
     return
   }
   
