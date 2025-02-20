@@ -1,0 +1,30 @@
+:root {
+  --vp-c-brand: #2DBDB6;
+  --vp-c-brand-light: #42d3cc;
+  --vp-c-brand-lighter: #53e8e1;
+  --vp-c-brand-dark: #25a49e;
+  --vp-c-brand-darker: #1d8a84;
+}
+
+.VPNav {
+  display: block !important;
+}
+
+.VPNavBar {
+  display: block !important;
+}
+
+/* Add these new styles for the theme switcher alignment */
+.VPNavBarAppearance {
+  margin-top: -2px !important; /* Adjust this value as needed */
+}
+
+.VPNavBarAppearance .VPSwitch {
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.VPNavBarAppearance .VPSwitch :deep(.check) {
+  transform: translateY(0) !important;
+}
