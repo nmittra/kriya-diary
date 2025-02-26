@@ -3,6 +3,7 @@ import { CookieConsent } from './components/CookieConsent'
 import { Footer } from './components/Footer'
 import { LoadingIndicator } from './components/LoadingIndicator'
 import { ErrorBoundary } from './components/ErrorBoundary'
+import { SkipToContent } from './components/SkipToContent'
 import { useState, useEffect, useMemo } from 'react'
 import { useLocation, Outlet, useNavigation, OutletContext } from 'react-router-dom'
 
@@ -48,6 +49,8 @@ function App() {
 
   return (
     <Box bg={bg} minH="100vh" display="flex" flexDirection="column">
+      <SkipToContent />
+      <Box as="main" id="main-content" flex="1" role="main">
       <ScrollToTop />
       <Box flex="1">
         {isLoading && <LoadingIndicator />}

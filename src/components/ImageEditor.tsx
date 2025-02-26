@@ -51,8 +51,13 @@ export const ImageEditor = ({
     return index !== -1 ? index : 0
   }
 
+  const showSidebar = useBreakpointValue({ base: false, lg: true });
+
   return (
-    <Box p={6} bg={bg} borderRadius="lg" shadow="md" minH="600px" w="100%">
+    <Box>
+      <AdContainer id="leaderboard-top" type="leaderboard" />
+      <Grid templateColumns={showSidebar ? '1fr 300px' : '1fr'} gap={4}>
+        <Box p={6} bg={bg} borderRadius="lg" shadow="md" minH="600px" w="100%">
       <Grid templateColumns={{ base: '1fr', md: '300px 1fr' }} gap={6}>
         <Box>
           <Image

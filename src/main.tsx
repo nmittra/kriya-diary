@@ -9,22 +9,22 @@ import { ErrorBoundary } from './components/ErrorBoundary'
 import { RouteErrorBoundary } from './components/RouteErrorBoundary'
 
 // Lazy load components
-const LandingPage = lazy(() => import('./components/LandingPage'))
-const CompressPage = lazy(() => import('./pages/CompressPage'))
-const ResizePage = lazy(() => import('./pages/ResizePage'))
-const WatermarkPage = lazy(() => import('./pages/WatermarkPage'))
-const EditorPage = lazy(() => import('./pages/EditorPage'))
-const CropPage = lazy(() => import('./pages/CropPage'))
-const ConvertPage = lazy(() => import('./pages/ConvertPage'))
-const MemePage = lazy(() => import('./pages/MemePage'))
-const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'))
-const TermsOfService = lazy(() => import('./pages/TermsOfService'))
-const CookiePolicy = lazy(() => import('./pages/CookiePolicy'))
-const Copyright = lazy(() => import('./pages/Copyright'))
-const Contact = lazy(() => import('./pages/Contact'))
-const Sitemap = lazy(() => import('./pages/Sitemap'))
-const NotFound = lazy(() => import('./pages/NotFound'))
-const DownloadPage = lazy(() => import('./pages/DownloadPage'))
+const LandingPage = lazy(() => import('./components/LandingPage').then(module => ({ default: module.default || module })))
+const CompressPage = lazy(() => import('./pages/CompressPage').then(module => ({ default: module.default || module })))
+const ResizePage = lazy(() => import('./pages/ResizePage').then(module => ({ default: module.default || module })))
+const WatermarkPage = lazy(() => import('./pages/WatermarkPage').then(module => ({ default: module.default || module })))
+const EditorPage = lazy(() => import('./pages/EditorPage').then(module => ({ default: module.default || module })))
+const CropPage = lazy(() => import('./pages/CropPage').then(module => ({ default: module.default || module })))
+const ConvertPage = lazy(() => import('./pages/ConvertPage').then(module => ({ default: module.default || module })))
+const MemePage = lazy(() => import('./pages/MemePage').then(module => ({ default: module.default || module })))
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy').then(module => ({ default: module.default || module })))
+const TermsOfService = lazy(() => import('./pages/TermsOfService').then(module => ({ default: module.default || module })))
+const CookiePolicy = lazy(() => import('./pages/CookiePolicy').then(module => ({ default: module.default || module })))
+const Copyright = lazy(() => import('./pages/Copyright').then(module => ({ default: module.default || module })))
+const Contact = lazy(() => import('./pages/Contact').then(module => ({ default: module.default || module })))
+const Sitemap = lazy(() => import('./pages/Sitemap').then(module => ({ default: module.default || module })))
+const NotFound = lazy(() => import('./pages/NotFound').then(module => ({ default: module.default || module })))
+const DownloadPage = lazy(() => import('./pages/DownloadPage').then(module => ({ default: module.default || module })))
 
 const theme = extendTheme({
   config: {
