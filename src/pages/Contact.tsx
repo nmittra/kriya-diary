@@ -15,8 +15,7 @@ import {
 import { Header } from '../components/Header'
 import { useState } from 'react'
 
-// Change from export function Contact() to:
-const Contact = () => {
+export function Contact() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [subject, setSubject] = useState('')
@@ -134,5 +133,3 @@ const Contact = () => {
     </Box>
   )
 }
-
-export default Contact

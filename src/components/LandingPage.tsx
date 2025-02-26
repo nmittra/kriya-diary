@@ -55,7 +55,7 @@ function FeatureCard({ icon, title, description, to }: FeatureCardProps) {
   )
 }
 
-export function LandingPage() {
+function LandingPage() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const features = [
     {
@@ -74,7 +74,7 @@ export function LandingPage() {
       icon: FiEdit,
       title: 'Photo Editor',
       description: 'Spice up your pictures with text, effects, frames or stickers. Simple editing tools for your image needs.',
-      to: '/editor/main',
+      to: '/editor',
     },
     {
       icon: FiDownload,
@@ -86,19 +86,19 @@ export function LandingPage() {
       icon: FiCrop,
       title: 'Crop IMAGE',
       description: 'Crop your images to the perfect size and aspect ratio. Remove unwanted areas with precision.',
-      to: '/editor/crop',
+      to: '/crop',
     },
     {
       icon: FiEdit,
       title: 'Convert Format',
       description: 'Convert your images between different formats including JPG, PNG, and WebP while maintaining quality.',
-      to: '/editor/convert',
+      to: '/convert',
     },
     {
       icon: FiEdit,
       title: 'Meme Generator',
       description: 'Create funny memes by adding custom text to your images. Perfect for social media sharing.',
-      to: '/editor/meme',
+      to: '/meme',
     }
   ]
 
@@ -196,3 +196,5 @@ export function LandingPage() {
     </Box>
   )
 }
+
+export default LandingPage

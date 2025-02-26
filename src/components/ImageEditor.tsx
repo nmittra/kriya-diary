@@ -20,18 +20,43 @@ import { WatermarkPanel } from './editor/WatermarkPanel'
 import { ConvertPanel } from './editor/ConvertPanel'
 import { CropPanel } from './editor/CropPanel'
 import { MemePanel } from './editor/MemePanel'
-import { useParams } from 'react-router-dom'
 
-export const ImageEditor = ({ selectedImage: propSelectedImage, defaultTab }: {
+export const ImageEditor = ({
+  selectedImage: propSelectedImage,
+  setSelectedImage,
+  defaultTab,
+}: {
   selectedImage?: { file: File; preview: string } | null
+  setSelectedImage: (image: { file: File; preview: string } | null) => void
   defaultTab?: string
 }) => {
+  const [selectedImage, setLocalImage] = useState(propSelectedImage)
+  const [editedImage, setEditedImage] = useState<string | null>(propSelectedImage?.preview || null)
+  const bg = useColorModeValue('white', 'gray.700')
+
+  const handleDownload = () => {
+    if (editedImage) {
+      const link = document.createElement('a')
+      link.href = editedImage
+      link.download = selectedImage?.file.name || 'edited-image.png'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+    }
+  }
+
+  const getDefaultTabIndex = () => {
+    const tabs = ['resize', 'compress', 'watermark', 'convert', 'crop', 'meme']
+    const index = tabs.indexOf(defaultTab || '')
+    return index !== -1 ? index : 0
+  }
+
   return (
     <Box p={6} bg={bg} borderRadius="lg" shadow="md" minH="600px" w="100%">
       <Grid templateColumns={{ base: '1fr', md: '300px 1fr' }} gap={6}>
         <Box>
           <Image
-            src={selectedImage?.preview}
+            src={editedImage || selectedImage?.preview}
             alt="Preview"
             maxH="300px"
             objectFit="contain"
@@ -43,12 +68,17 @@ export const ImageEditor = ({ selectedImage: propSelectedImage, defaultTab }: {
               leftIcon={<FiDownload />}
               onClick={handleDownload}
               colorScheme="blue"
+              isDisabled={!editedImage}
             >
               Download
             </Button>
             <Button
               leftIcon={<FiTrash2 />}
-              onClick={() => setSelectedImage(null)}
+              onClick={() => {
+                setSelectedImage(null)
+                setLocalImage(null)
+                setEditedImage(null)
+              }}
               colorScheme="red"
               variant="ghost"
             >

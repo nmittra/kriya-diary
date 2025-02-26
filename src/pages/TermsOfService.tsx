@@ -93,4 +93,4 @@ const TermsOfService = () => {
   )
 }
 
-export default TermsOfService
+export { TermsOfService }

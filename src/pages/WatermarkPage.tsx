@@ -19,7 +19,10 @@ export function WatermarkPage() {
       <Header />
       <Box py={8}>
       <Container maxW="container.xl">
-        <VStack spacing={8}>
+        <VStack spacing={8} align="center" w="full">
+          <Heading as="h1" size="xl" textAlign="center" mb={4}>
+            Image Watermark
+          </Heading>
           {!selectedImage ? (
             <ImageUploader setSelectedImage={setSelectedImage} />
           ) : (
@@ -35,3 +38,4 @@ export function WatermarkPage() {
     </Box>
   )
 }
+export default WatermarkPage

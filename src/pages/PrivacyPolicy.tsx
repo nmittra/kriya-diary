@@ -101,4 +101,4 @@ const PrivacyPolicy = () => {
   )
 }
 
-export default PrivacyPolicy
+export { PrivacyPolicy }

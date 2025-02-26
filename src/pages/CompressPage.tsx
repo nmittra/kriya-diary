@@ -9,28 +9,38 @@ interface ImageFile {
   preview: string
 }
 
-export function CompressPage() {
-  const [selectedImage, setSelectedImage] = useState<ImageFile | null>(null)
+export default CompressPage
 
+function CompressPage() {
+  const [selectedImage, setSelectedImage] = useState<ImageFile | null>(null)
   const bg = useColorModeValue('gray.50', 'gray.800')
 
   return (
-    <Box bg={bg} minH="100vh">
+    <Box bg={bg} minH="100vh" display="flex" flexDirection="column">
       <Header />
-      <Box py={8}>
-      <Container maxW="container.xl">
-        <VStack spacing={8}>
-          {!selectedImage ? (
-            <ImageUploader setSelectedImage={setSelectedImage} />
-          ) : (
-            <ImageEditor
-              selectedImage={selectedImage}
-              setSelectedImage={setSelectedImage}
-              defaultTab="compress"
-            />
-          )}
-        </VStack>
-      </Container>
+      <Box py={8} flex="1">
+        <Container maxW="container.xl" h="100%" display="flex" flexDirection="column">
+          <VStack spacing={8} flex="1" w="100%" visibility="visible" opacity={1}>
+            <Heading as="h1" size="xl" textAlign="center" mb={4}>
+              Compress Your Images
+            </Heading>
+            {!selectedImage ? (
+              <ImageUploader setSelectedImage={setSelectedImage} />
+            ) : (
+              <ImageEditor
+                selectedImage={selectedImage}
+
+export default CompressPage
+                setSelectedImage={setSelectedImage}
+
+export default CompressPage
+                defaultTab="compress"
+              />
+            )}
+
+export default CompressPage
+          </VStack>
+        </Container>
       </Box>
     </Box>
   )
